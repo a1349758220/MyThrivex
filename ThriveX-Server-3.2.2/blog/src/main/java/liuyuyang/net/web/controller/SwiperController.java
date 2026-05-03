@@ -11,6 +11,7 @@ import liuyuyang.net.model.Swiper;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.web.service.SwiperService;
 import liuyuyang.net.common.utils.Paging;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "轮播图管理")
+@Slf4j
 @RestController
 @RequestMapping("/swiper")
 @Transactional

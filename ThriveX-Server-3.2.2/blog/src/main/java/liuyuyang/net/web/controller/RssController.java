@@ -11,12 +11,14 @@ import liuyuyang.net.model.Rss;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.vo.PageVo;
 import liuyuyang.net.web.service.RssService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.*;
 
 @Api(tags = "订阅管理")
+@Slf4j
 @RestController
 @RequestMapping("/rss")
 public class RssController {

@@ -1,13 +1,21 @@
+# IDE 项目配置
 **/.idea/
 
+# 构建输出 & 本地配置
 **/target/
 blog/src/main/resources/application-local.yml
 
+# Docker 数据卷
 docker/mysql_data
 docker/backup
 
+# macOS 系统文件
 .DS_Store
 **/.DS_Store
+
+# 压缩文件
+*.rar
+*.zip
 
 # 环境变量配置文件
 ThriveX-Admin-3.4.5/.env

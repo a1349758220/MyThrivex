@@ -81,8 +81,13 @@ export default () => {
         </Form.Item>
 
         <Form.Item label="ICP 备案号" name="icp">
-          <Input placeholder="豫ICP备2020031040号-1" />
+          <Input placeholder="输入网站备案号" />
         </Form.Item>
+
+        <Form.Item label="公安备案号" name="gongan">
+          <Input placeholder="输入公安备案号" />
+        </Form.Item>
+
 
         <Form.Item label="网站创建时间" name="create_time">
           <DatePicker className="w-full" />

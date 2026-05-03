@@ -9,6 +9,7 @@ import liuyuyang.net.model.Footprint;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.web.service.FootprintService;
 import liuyuyang.net.vo.FilterVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "足迹管理")
+@Slf4j
 @RestController
 @RequestMapping("/footprint")
 @Transactional

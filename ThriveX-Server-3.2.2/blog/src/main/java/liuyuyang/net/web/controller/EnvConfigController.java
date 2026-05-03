@@ -8,6 +8,7 @@ import liuyuyang.net.common.annotation.NoTokenRequired;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.model.EnvConfig;
 import liuyuyang.net.web.service.EnvConfigService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "环境配置管理")
+@Slf4j
 @RestController
 @RequestMapping("/env_config")
 public class EnvConfigController {

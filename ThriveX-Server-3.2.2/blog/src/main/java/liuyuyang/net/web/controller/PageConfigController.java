@@ -9,6 +9,7 @@ import liuyuyang.net.common.annotation.RateLimit;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.model.PageConfig;
 import liuyuyang.net.web.service.PageConfigService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "页面配置管理")
+@Slf4j
 @RestController
 @RequestMapping("/page_config")
 public class PageConfigController {

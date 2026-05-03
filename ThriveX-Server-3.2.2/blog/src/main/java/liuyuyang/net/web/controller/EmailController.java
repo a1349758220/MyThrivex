@@ -7,6 +7,7 @@ import liuyuyang.net.dto.email.DismissEmailDTO;
 import liuyuyang.net.dto.email.WallEmailDTO;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.common.utils.EmailUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
@@ -15,6 +16,7 @@ import org.thymeleaf.context.Context;
 import javax.annotation.Resource;
 
 @Api(tags = "邮件管理")
+@Slf4j
 @RestController
 @RequestMapping("/email")
 @Transactional

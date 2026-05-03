@@ -16,6 +16,7 @@ import liuyuyang.net.web.service.UserService;
 import liuyuyang.net.common.utils.Paging;
 import liuyuyang.net.vo.PageVo;
 import liuyuyang.net.vo.user.UserFilterVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "用户管理")
+@Slf4j
 @RestController
 @RequestMapping("/user")
 @Transactional

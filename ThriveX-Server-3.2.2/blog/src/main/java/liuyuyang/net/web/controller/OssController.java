@@ -8,6 +8,7 @@ import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.web.service.OssService;
 import liuyuyang.net.vo.oss.OssVo;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "存储管理")
+@Slf4j
 @RestController
 @RequestMapping("/oss")
 @AllArgsConstructor

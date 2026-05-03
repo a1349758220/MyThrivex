@@ -14,6 +14,7 @@ import liuyuyang.net.model.Article;
 import liuyuyang.net.vo.PageVo;
 import liuyuyang.net.vo.article.ArticleFilterVo;
 import liuyuyang.net.web.service.ArticleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "文章管理")
+@Slf4j
 @RestController
 @RequestMapping("/article")
 @Transactional

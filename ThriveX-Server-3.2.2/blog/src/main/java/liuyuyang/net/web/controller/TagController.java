@@ -10,6 +10,7 @@ import liuyuyang.net.model.Tag;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.web.service.TagService;
 import liuyuyang.net.common.utils.Paging;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "标签管理")
+@Slf4j
 @RestController
 @RequestMapping("/tag")
 @Transactional

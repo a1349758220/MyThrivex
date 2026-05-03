@@ -12,6 +12,7 @@ import org.dromara.x.file.storage.core.FileStorageService;
 import org.dromara.x.file.storage.core.get.ListFilesResult;
 import org.dromara.x.file.storage.core.get.RemoteDirInfo;
 import org.dromara.x.file.storage.core.get.RemoteFileInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +30,7 @@ import java.util.*;
  * @date 2024/12/14
  */
 @Api(tags = "文件管理")
+@Slf4j
 @RestController
 @RequestMapping("/file")
 @Transactional

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.model.Assistant;
 import liuyuyang.net.web.service.AssistantService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "助手管理")
+@Slf4j
 @RestController
 @RequestMapping("/assistant")
 @Transactional

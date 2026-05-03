@@ -7,6 +7,7 @@ import liuyuyang.net.common.annotation.NoTokenRequired;
 import liuyuyang.net.common.annotation.RateLimit;
 import liuyuyang.net.common.utils.Result;
 import liuyuyang.net.web.service.WebConfigService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.Map;
 import liuyuyang.net.model.WebConfig;
 
 @Api(tags = "网站配置管理")
+@Slf4j
 @RestController
 @RequestMapping("/web_config")
 @Transactional

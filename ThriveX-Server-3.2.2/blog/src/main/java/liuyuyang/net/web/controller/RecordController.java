@@ -12,6 +12,7 @@ import liuyuyang.net.web.service.RecordService;
 import liuyuyang.net.common.utils.Paging;
 import liuyuyang.net.vo.FilterVo;
 import liuyuyang.net.vo.PageVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "说说管理")
+@Slf4j
 @RestController
 @RequestMapping("/record")
 @Transactional
