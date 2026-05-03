@@ -1,0 +1,29 @@
+**/.idea/
+
+**/target/
+blog/src/main/resources/application-local.yml
+
+docker/mysql_data
+docker/backup
+
+.DS_Store
+**/.DS_Store
+
+# 环境变量配置文件
+ThriveX-Admin-3.4.5/.env
+ThriveX-Blog-3.3.6/.env
+
+# Admin 编译产物
+ThriveX-Admin-3.4.5/dist/
+ThriveX-Admin-3.4.5/node_modules/
+
+# Blog 编译产物
+ThriveX-Blog-3.3.6/.next/
+ThriveX-Blog-3.3.6/node_modules/
+
+# 数据库文件
+data/ThriveX.sql
+
+# Server 编译产物
+**/ThriveX-Server-3.2.2/**/target/
+**/ThriveX-Server-3.2.2/**/*.iml
