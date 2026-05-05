@@ -159,7 +159,7 @@ export default () => {
               <Loading />
             </div>
           ) : (
-            <div className="w-[90%] xl:w-[1200px] mx-auto mt-8 pb-12">
+            <div className="w-[90%] xl:w-[1300px] mx-auto mt-8 pb-12">
               {walls && walls.length > 0 ? (
                 <>
                   <WallMasonry walls={walls} />

@@ -54,9 +54,11 @@ export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
 type IconData = Awaited<ReturnType<typeof fetchSimpleIcons>>;
 
 export default function IconCloud({ iconSlugs }: { iconSlugs: string[] }) {
+  const [mounted, setMounted] = useState(false);
   const [data, setData] = useState<IconData | null>(null);
 
   useEffect(() => {
+    setMounted(true);
     fetchSimpleIcons({ slugs: iconSlugs }).then(setData);
   }, [iconSlugs]);
 
@@ -65,6 +67,10 @@ export default function IconCloud({ iconSlugs }: { iconSlugs: string[] }) {
 
     return Object.values(data.simpleIcons).map((icon) => renderCustomIcon(icon, 'light'));
   }, [data]);
+
+  if (!mounted) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 200 }} />;
+  }
 
   return (
     <Cloud {...cloudProps}>

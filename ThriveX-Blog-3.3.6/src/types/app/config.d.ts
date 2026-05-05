@@ -22,6 +22,7 @@ export interface Web {
     keyword: string,
     footer: string,
     icp: string,
+    mnengbei: string,
     create_time: number,
 }
 

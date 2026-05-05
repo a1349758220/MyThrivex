@@ -88,6 +88,9 @@ export default () => {
           <Input placeholder="输入公安备案号" />
         </Form.Item>
 
+        <Form.Item label="萌备案号" name="mnengbei">
+          <Input placeholder="输入萌备案号" />
+        </Form.Item>
 
         <Form.Item label="网站创建时间" name="create_time">
           <DatePicker className="w-full" />
