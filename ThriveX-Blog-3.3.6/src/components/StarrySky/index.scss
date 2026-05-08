@@ -1,0 +1,13 @@
+.StarrySky {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    // background: rgba(0, 0, 0, 0.45);
+
+    &__canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+}

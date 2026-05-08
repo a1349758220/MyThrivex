@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Input, Button, message, DatePicker } from 'antd';
+import { Form, Input, Button, message, DatePicker, Space } from 'antd';
 import { editWebConfigDataAPI } from '@/api/config';
 import { Web } from '@/types/app/config';
 import { useWebStore } from '@/stores';
@@ -89,7 +89,21 @@ export default () => {
         </Form.Item>
 
         <Form.Item label="萌备案号" name="mnengbei">
-          <Input placeholder="输入萌备案号" />
+          <Space.Compact style={{ width: '100%' }}>
+            <span
+              className="inline-flex items-center bg-gray-100 border border-gray-300 rounded-l whitespace-nowrap"
+              style={{ borderRight: 'none', height: 40, fontSize: 14, color: '#333', padding: '0 12px' }}
+            >
+              萌ICP备
+            </span>
+            <Input placeholder="输入备案号" />
+            <span
+              className="inline-flex items-center bg-gray-100 border border-gray-300 rounded-r whitespace-nowrap"
+              style={{ borderLeft: 'none', height: 40, fontSize: 14, color: '#333', padding: '0 12px' }}
+            >
+              号
+            </span>
+          </Space.Compact>
         </Form.Item>
 
         <Form.Item label="网站创建时间" name="create_time">

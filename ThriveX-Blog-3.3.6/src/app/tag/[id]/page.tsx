@@ -1,4 +1,4 @@
-import Starry from '@/components/Starry';
+import Starry from '@/components/StarrySky';
 import Slide from '@/components/Slide';
 import Classics from '@/components/ArticleLayout/Classics';
 import Pagination from '@/components/Pagination';

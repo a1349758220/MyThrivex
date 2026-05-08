@@ -1,12 +1,8 @@
 import Slide from '@/components/Slide';
-import Typed from '@/components/Typed';
-import Starry from '@/components/Starry';
+import Starry from '@/components/StarrySky';
 import Container from '@/components/Container';
 import ArticleLayout from '@/components/ArticleLayout';
 import Sidebar from '@/components/Sidebar';
-
-import { getWebConfigDataAPI } from '@/api/config';
-import { Theme } from '@/types/app/config';
 
 interface Props {
   searchParams: Promise<{ page: number }>;
@@ -15,18 +11,15 @@ interface Props {
 export default async (props: Props) => {
   const searchParams = await props.searchParams;
   const page = searchParams.page ?? 1;
-  const response = await getWebConfigDataAPI<{ value: Theme }>('theme');
-  const data = response?.data?.value as Theme;
 
   return (
     <>
-      {/* <Lantern data={['新', '春', '快', '乐']} /> */}
 
-      <Slide src={data?.swiper_image}>
+      <Slide showMeteors>
         {/* 星空背景组件 */}
         <Starry />
-        {/* 打字机组件 */}
-        <Typed className="absolute top-[45%] sm:top-[40%] left-[50%] transform -translate-x-1/2 w-[80%] text-center text-white xs:text-xl sm:text-[30px] leading-7 sm:leading-[40px] md:leading-[50px] custom_text_shadow"></Typed>
+        {/* 首页欢迎词 */}
+        {/* <HomeWelcome /> */}
       </Slide>
 
       <Container>

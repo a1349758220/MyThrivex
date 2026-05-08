@@ -35,3 +35,8 @@ data/ThriveX.sql
 # Server 编译产物
 **/ThriveX-Server-3.2.2/**/target/
 **/ThriveX-Server-3.2.2/**/*.iml
+
+# 其他忽略目录
+.github/
+.claude/
+.vite/

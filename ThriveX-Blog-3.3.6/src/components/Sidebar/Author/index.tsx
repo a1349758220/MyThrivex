@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import avatarBg from '@/assets/image/avatar_bg.jpg';
 import CSDN from '@/assets/svg/socializing/CSDN.svg';
 import Douyin from '@/assets/svg/socializing/Douyin.svg';
 import GitHub from '@/assets/svg/socializing/GitHub.svg';
@@ -38,7 +37,7 @@ const Author = async () => {
       className="flex flex-col items-center pt-16 bg-no-repeat bg-white dark:bg-black-b w-full h-[350px] mb-3 tw_container"
       style={{
         backgroundSize: `100% 35%`,
-        backgroundImage: `url(${avatarBg.src})`,
+        // backgroundImage: `url(${avatarBg.src})`,
       }}
     >
       {/* 作者头像 */}

@@ -24,7 +24,7 @@ import DisableRightClick from '@/components/DisableRightClick';
 
 // 加载本地字体
 const LXGWWenKai = localFont({
-  src: '../assets/font/LXGWWenKai-Regular.ttf',
+  src: '../assets/font/LXGWNeoXiHeiPlus.ttf',
   display: 'swap',
 });
 

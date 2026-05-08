@@ -51,6 +51,17 @@ body {
     text-shadow: 0 0.1875rem 0.3125rem #1c1f21;
 }
 
+@keyframes slide-arrow-float {
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, 10px);
+    }
+}
+
 // 头像动画效果
 .avatar-animation {
     animation: 5s linear infinite miniShape;
@@ -224,3 +235,81 @@ body {
 //         transition-duration: 0s !important;
 //     }
 // }
+
+.home-meteor-layer {
+    // Cover only the slide hero; overflow is clipped by the Slide container.
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    display: none;
+    overflow: hidden;
+    pointer-events: none;
+    isolation: isolate;
+}
+
+html.dark .home-meteor-layer {
+    display: block;
+}
+
+.home-meteor {
+    // React writes the path variables; CSS handles rendering and animation.
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    width: var(--length);
+    height: var(--height);
+    border-radius: 999px;
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(0) scaleX(0.75);
+    transform-origin: right center;
+    background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), var(--color));
+    box-shadow: 0 0 0px var(--color), 0 0 0px rgba(46, 46, 46, 0.45);
+    animation: home-meteor-flight 5s linear var(--delay) infinite both;
+    will-change: transform, opacity;
+}
+
+.home-meteor::before,
+.home-meteor::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: inherit;
+}
+
+.home-meteor::before {
+    filter: blur(6px);
+}
+
+.home-meteor::after {
+    filter: blur(16px);
+}
+
+@keyframes home-meteor-flight {
+    0% {
+        opacity: 0;
+        transform: rotate(var(--angle)) translateX(0) scaleX(0.75);
+    }
+
+    // Fade in near the start so meteors do not pop in halfway through the hero.
+    4% {
+        opacity: 1;
+        transform: rotate(var(--angle)) translateX(calc(var(--distance) * 0.08)) scaleX(1);
+    }
+
+    52% {
+        opacity: 0.92;
+        transform: rotate(var(--angle)) translateX(calc(var(--end-distance) * 0.78)) scaleX(1);
+    }
+
+    64% {
+        opacity: 0;
+        transform: rotate(var(--angle)) translateX(var(--end-distance)) scaleX(1);
+    }
+
+    // Stay hidden for the rest of the cycle to create a cooldown window.
+    100% {
+        opacity: 0;
+        transform: rotate(var(--angle)) translateX(var(--end-distance)) scaleX(1);
+    }
+}

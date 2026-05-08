@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, useDisclosure } from '@heroui/react';
 import { BiCog, BiCommand } from 'react-icons/bi';
@@ -10,9 +10,13 @@ import Search from '../Search';
 import Rss from '../Tools/components/Rss';
 import { LuMoonStar } from 'react-icons/lu';
 import { FaRegSun } from 'react-icons/fa';
+import { MdOutlineAdsClick, MdOutlineTouchApp } from 'react-icons/md';
+
+const CUSTOM_CONTEXT_MENU_KEY = 'customContextMenuEnabled';
 
 const FloatingBlock = () => {
   const [isExpanded, setIsExpanded] = useState(false); // 展开状态的变量
+  const [isCustomContextMenuEnabled, setIsCustomContextMenuEnabled] = useState(true);
   const [isDragging, setIsDragging] = useState(false); // 拖拽状态
   const constraintsRef = useRef(null); // 拖拽约束参考
   const { isDark, setIsDark, web } = useConfigStore();
@@ -50,6 +54,18 @@ const FloatingBlock = () => {
     setIsDark(!isDark);
   };
 
+  useEffect(() => {
+    setIsCustomContextMenuEnabled(localStorage.getItem(CUSTOM_CONTEXT_MENU_KEY) !== 'false');
+  }, []);
+
+  const onToggleCustomContextMenu = () => {
+    const nextStatus = !isCustomContextMenuEnabled;
+
+    setIsCustomContextMenuEnabled(nextStatus);
+    localStorage.setItem(CUSTOM_CONTEXT_MENU_KEY, String(nextStatus));
+    window.dispatchEvent(new CustomEvent('custom-context-menu-change', { detail: nextStatus }));
+  };
+
   const actionItems = [
     {
       icon: isDark ? FaRegSun : LuMoonStar,
@@ -70,6 +86,12 @@ const FloatingBlock = () => {
       onClick: onRssOpenChange,
     },
     {
+      icon: isCustomContextMenuEnabled ? MdOutlineTouchApp : MdOutlineAdsClick,
+      id: 'context-menu',
+      label: isCustomContextMenuEnabled ? '关闭自定义右键列表' : '开启自定义右键列表',
+      onClick: onToggleCustomContextMenu,
+    },
+    {
       icon: IoArrowUpOutline,
       id: 'top',
       label: '返回顶部',
@@ -80,7 +102,7 @@ const FloatingBlock = () => {
   // 计算每个项目的位置（圆形分布）
   const getItemPosition = (index: number, total: number) => {
     const angle = (index * 360) / total - 90; // 从顶部开始
-    const radius = 50; // 半径 [距离按钮的距离]
+    const radius = 58; // 半径 [距离按钮的距离]
     const x = Math.cos((angle * Math.PI) / 180) * radius;
     const y = Math.sin((angle * Math.PI) / 180) * radius;
     return { x, y };
@@ -176,7 +198,7 @@ const FloatingBlock = () => {
         <Button 
           isIconOnly 
           size="lg" 
-          className="bg-blue-500 hover:bg-blue-600 text-white shadow-lg rounded-full" 
+          className="bg-black text-white shadow-lg rounded-full hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/80" 
           onPress={toggleExpanded} 
           aria-label={isExpanded ? '收起功能菜单' : '展开功能菜单'} 
           title={isExpanded ? '收起功能菜单' : '展开功能菜单'}

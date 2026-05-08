@@ -19,10 +19,35 @@
         animation: Rotate_StarrySky 90s infinite linear;
     }
 
-    .star_starrySky {
+     .star_starrySky {
+        border-radius: 50%;   /* 变成圆形 */
+        width: 4px;
+        height: 4px;
+        background: #070707;
+        position: absolute;
+        top: 0;
+        left: 0;
+        // transform-origin: 0 0 -300px;
+        // transform: translate3d(0, 0, -300px);
+        backface-visibility: hidden;
+    }
+
+    .star_starrySky_night {
         width: 2px;
         height: 2px;
         background: #F7F7B6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: 0 0 -300px;
+        transform: translate3d(0, 0, -300px);
+        backface-visibility: hidden;
+    }
+
+     .star_starrySky_daytime {
+        width: 2px;
+        height: 2px;
+        background: #070707;
         position: absolute;
         top: 0;
         left: 0;

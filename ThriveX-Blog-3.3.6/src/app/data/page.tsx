@@ -1,5 +1,5 @@
 import Slide from '@/components/Slide';
-import Starry from '@/components/Starry';
+import Starry from '@/components/StarrySky';
 import Statis from './components/Statis';
 import Archiving from './components/Archiving';
 import { getArticleListAPI } from '@/api/article';

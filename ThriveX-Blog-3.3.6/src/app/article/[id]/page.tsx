@@ -3,7 +3,7 @@ import { getWebConfigDataAPI } from '@/api/config';
 import { Web } from '@/types/app/config';
 import { Metadata } from 'next';
 
-import Starry from '@/components/Starry';
+import Starry from '@/components/StarrySky';
 import Slide from '@/components/Slide';
 
 import Tag from '../components/Tag';

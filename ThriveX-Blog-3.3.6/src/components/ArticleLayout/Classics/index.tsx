@@ -34,7 +34,7 @@ const Classics = async ({ data }: ClassicsProps) => {
   return (
     <div className="space-y-4">
       {data?.result?.map((item, index) => (
-        <div key={item.id} className="relative overflow-hidden flex h-[190px] md:h-60 lg:h-52 xl:h-60 bg-black-b tw_container">
+        <div key={item.id} className="relative overflow-hidden flex h-[190px] md:h-60 lg:h-52 xl:h-60 bg-white dark:bg-black-b tw_container">
           {index % 2 === 0 && (
             <div
               className="hidden sm:block relative min-w-[45%] bg-cover bg-no-repeat bg-center scale-100 hover:scale-125 z-10 transition-transform"
@@ -45,29 +45,29 @@ const Classics = async ({ data }: ClassicsProps) => {
             />
           )}
 
-          <div className="relative w-full sm:w-[65%] py-5 px-5 sm:px-10 lg:px-5 xl:px-10 z-20">
+          <div className="relative w-full sm:w-[65%] py-5 px-5 sm:px-10 lg:px-5 xl:px-10 z-20 bg-white dark:bg-transparent">
             <Link href={`/article/${item.id}`} className="flex flex-col justify-between h-full text-center sm:text-start">
-              <h3 className="overflow-hidden relative w-full my-2.5 text-white hover:text-primary text-lg md:text-xl lg:text-[22px] xl:text-2xl   line-clamp-1">{item.title}</h3>
-              <p className="text-[#cecece] text-sm sm:text-[15px] leading-7 sm:indent-8 line-clamp-2 xl:line-clamp-3">{genArticleInfo(item)}</p>
+              <h3 className="overflow-hidden relative w-full my-2.5 text-black dark:text-white hover:text-primary text-lg md:text-xl lg:text-[22px] xl:text-2xl   line-clamp-1">{item.title}</h3>
+              <p className="text-black dark:text-[#cecece] text-sm sm:text-[15px] leading-7 sm:indent-8 line-clamp-2 xl:line-clamp-3">{genArticleInfo(item)}</p>
 
               <div className={`flex ${index % 2 === 0 ? 'sm:justify-start' : 'sm:justify-end'} justify-center pt-5 text-end space-x-4 sm:space-x-8`}>
-                <div className="flex items-center text-xs text-white">
+                <div className="flex items-center text-xs text-black dark:text-white">
                   <span className="pr-1">
-                    <IoTimeOutline className="p-1 mt-[-2px] mr-[3px] text-[23px] text-white rounded-full align-middle bg-[#539dfd]" />
+                    <IoTimeOutline className="p-1 mt-[-2px] mr-[3px] text-[23px] text-black dark:text-white rounded-full align-middle" />
                   </span>
                   <span>{dayjs(+item.createTime!).format('YYYY-MM-DD')}</span>
                 </div>
 
-                <div className="flex items-center text-xs text-white">
+                <div className="flex items-center text-xs text-black dark:text-white">
                   <span className="pr-1">
-                    <RiFireLine className="p-1 mt-[-2px] mr-[3px] text-[23px] text-white rounded-full align-middle bg-[#eb373a]" />
+                    <RiFireLine className="p-1 mt-[-2px] mr-[3px] text-[23px] text-black dark:text-white rounded-full align-middle" />
                   </span>
                   <span>{item.view}</span>
                 </div>
 
-                <div className="flex items-center text-xs text-white">
+                <div className="flex items-center text-xs text-black dark:text-white">
                   <span className="pr-1">
-                    <GoTag className="p-1 mt-[-2px] mr-[3px] text-[23px] text-white rounded-full align-middle bg-[#f5a630]" />
+                    <GoTag className="p-1 mt-[-2px] mr-[3px] text-[23px] text-black dark:text-white rounded-full align-middle" />
                   </span>
                   <span>{item.cateList[0]?.name}</span>
                 </div>
@@ -76,7 +76,7 @@ const Classics = async ({ data }: ClassicsProps) => {
           </div>
 
           <div
-            className="absolute w-full h-60 bg-cover bg-center"
+            className="absolute hidden w-full h-60 bg-cover bg-center dark:block"
             style={{
               filter: 'blur(2.5rem) brightness(0.6)',
               backgroundImage: `url(${item.cover ?? covers[getRandom(0, covers.length - 1)]})`,

@@ -77,13 +77,13 @@ export default () => {
 
           {/* logo */}
           <Link href="/" className="flex items-center p-5 text-[15px]  ">
-            {isDark ? <img src={theme?.dark_logo} alt="Logo" className="min-w-10 h-10 hover:scale-90 transition-transform" /> : <img src={isPathSty || isScrolled ? theme?.light_logo : theme?.dark_logo} alt="Logo" className="min-w-10 h-10 hover:scale-90 transition-transform" />}
+            <img src={isDark ? theme?.dark_logo : theme?.light_logo} alt="Logo" className="min-w-10 h-10 hover:scale-90 transition-transform" />
           </Link>
 
           <ul className="hidden lg:flex items-center h-16">
             <li className="group/one relative">
-              <Link href="/" className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary   ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
-                💎 首页
+              <Link href="/" className="flex items-center p-5 text-[18px] font-bold text-black dark:text-white group-hover/one:!text-slate-500 dark:group-hover/one:!text-[#efcea2]">
+                首页
               </Link>
             </li>
 
@@ -93,8 +93,8 @@ export default () => {
                 {/* 渲染分类 */}
                 {one.type === 'cate' && (
                   <li className="group/one relative">
-                    <Link href={`/cate/${one.id}?name=${one.name}`} target={`${one.url.startsWith('http') ? '_blank' : '_self'}`} className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary   ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
-                      {one.icon} {one.name}
+                    <Link href={`/cate/${one.id}?name=${one.name}`} target={`${one.url.startsWith('http') ? '_blank' : '_self'}`} className="flex items-center p-5 text-[18px] font-bold text-black dark:text-white group-hover/one:!text-slate-500 dark:group-hover/one:!text-[#efcea2]">
+                      {one.name}
                       <Show is={!!one.children.length}>
                         <IoIosArrowDown className="ml-2" />
                       </Show>
@@ -104,7 +104,7 @@ export default () => {
                       <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md backdrop-blur-[5px] bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.95)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
                         {one.children?.map((two) => (
                           <li key={two.id} className="group/two">
-                            <Link href={`/cate/${two.id}?name=${two.name}`} target={`${two.url.startsWith('http') ? '_blank' : '_self'}`} className="relative inline-block w-full p-2.5 text-[15px] box-border text-[#666] dark:text-white hover:!text-primary transition-[padding] after:content-[''] after:absolute after:left-2.5 after:top-1/2 after:-translate-y-1/2 after:w-0 after:h-[3px] after:bg-primary after:transition-[width] group-hover/two:bg-[#f2f2f2] dark:group-hover/two:bg-[#323e50] group-hover/two:pl-8 hover:after:w-2.5">
+                            <Link href={`/cate/${two.id}?name=${two.name}`} target={`${two.url.startsWith('http') ? '_blank' : '_self'}`} className="relative inline-block w-full p-2.5 text-[18px] font-bold box-border text-black dark:text-white hover:!text-slate-500 dark:hover:!text-[#efcea2] transition-[padding] after:content-[''] after:absolute after:left-2.5 after:top-1/2 after:-translate-y-1/2 after:w-0 after:h-[3px] after:bg-primary after:transition-[width] group-hover/two:bg-[#f2f2f2] dark:group-hover/two:bg-[#323e50] group-hover/two:pl-8 hover:after:w-2.5 dark:hover:after:bg-[#efcea2]">
                               {two.name}
                             </Link>
                           </li>
@@ -115,29 +115,7 @@ export default () => {
                 )}
 
                 {/* 渲染导航 */}
-                {one.type === 'nav' && (
-                  <li className="group/one relative">
-                    <Link href={one.url} className={`flex items-center p-5 px-10 text-[15px] group-hover/one:!text-primary ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
-                      {one.icon} {one.name}
-                      {/* 如果有子分类就显示下拉三角 */}
-                      <Show is={!!one.children?.length}>
-                        <IoIosArrowDown className="ml-2" />
-                      </Show>
-                    </Link>
-
-                    <Show is={!!one.children?.length}>
-                      <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.95)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
-                        {one.children?.map((two) => (
-                          <li key={two.id} className="group/two relative">
-                            <Link href={two.url} className={`relative inline-block w-full p-2.5 pl-5 text-[15px] box-border text-[#666] dark:text-white hover:!text-primary transition-[padding] after:content-[''] after:absolute after:left-2.5 after:top-1/2 after:-translate-y-1/2 after:w-0 after:h-[3px] after:bg-primary after:transition-[width] group-hover/two:pl-8 hover:after:w-2.5`}>
-                              {two.icon} {two.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </Show>
-                  </li>
-                )}
+                
               </div>
             ))}
           </ul>

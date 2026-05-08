@@ -25,7 +25,7 @@ export default ({ total, page, path, className }: Props) => {
 
   return (
     <div className={className}>
-      <Pagination showControls total={total} page={+page} onChange={onChange} classNames={{ item: 'shadow-none bg-transparent dark:hover:!bg-black-b  ', prev: 'dark:bg-black-b  ', next: 'dark:bg-black-b  ' }} />
+      <Pagination showControls total={total} page={+page} onChange={onChange} classNames={{ item: 'shadow-none bg-transparent dark:hover:!bg-black-b  ', prev: 'dark:bg-black-b  ', next: 'dark:bg-black-b  ', cursor: 'bg-black text-white dark:bg-white dark:text-black' }} />
     </div>
   );
 };

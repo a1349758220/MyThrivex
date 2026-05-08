@@ -38,6 +38,8 @@ export interface Theme {
   light_logo: string;
   dark_logo: string;
   swiper_image: string;
+  swiper_image_dark: string;
+  default_theme: string;
   swiper_text: string[];
   reco_article: string[];
   social: string[];

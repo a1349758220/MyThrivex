@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Alert, Button, Checkbox, Divider, Form, Input, notification } from 'antd';
+import { Alert, Button, Checkbox, Divider, Form, Input, notification, Segmented } from 'antd';
 import { CloudUploadOutlined, PictureOutlined } from '@ant-design/icons';
 
 import { Theme } from '@/types/app/config';
@@ -92,25 +92,56 @@ export default () => {
     <div>
       <h2 className="text-xl py-4">综合配置</h2>
 
-      <div className="w-full lg:w-[500px]">
+      <div className="w-full lg:w-[900px]">
         <Form form={form} onFinish={editThemeData} layout="vertical">
-          <Divider>亮色主题 Logo</Divider>
-          <Form.Item name="light_logo" label="亮色主题 Logo">
-            <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="light_logo" />} size="large" placeholder="请输入亮色Logo地址" />
-          </Form.Item>
-          <img src={form.getFieldValue('light_logo')} alt="" className="w-1/3 mt-4 rounded-sm" />
-
-          <Divider>暗色主题 Logo</Divider>
-          <Form.Item name="dark_logo" label="暗色主题 Logo">
-            <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="dark_logo" />} size="large" placeholder="请输入暗色Logo地址" />
-          </Form.Item>
-          <img src={form.getFieldValue('dark_logo')} alt="" className="w-1/3 mt-4 rounded-sm" />
+          <Divider>Logo 配置</Divider>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="flex flex-col items-center">
+              <Form.Item name="light_logo" label="亮色主题 Logo" className="w-full">
+                <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="light_logo" />} size="large" placeholder="请输入亮色Logo地址" />
+              </Form.Item>
+              <img src={form.getFieldValue('light_logo')} alt="" className="w-[100px] mt-4 rounded-sm" />
+            </div>
+            <div className="flex flex-col items-center">
+              <Form.Item name="dark_logo" label="暗色主题 Logo" className="w-full">
+                <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="dark_logo" />} size="large" placeholder="请输入暗色Logo地址" />
+              </Form.Item>
+              <img src={form.getFieldValue('dark_logo')} alt="" className="w-[100px] mt-4 rounded-sm" />
+            </div>
+          </div>
 
           <Divider>首页背景图</Divider>
-          <Form.Item name="swiper_image" label="首页背景图">
-            <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="swiper_image" />} size="large" placeholder="请输入背景图地址" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <Form.Item name="swiper_image_light" label="首页背景图（浅色）">
+                <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="swiper_image_light" />} size="large" placeholder="请输入浅色背景图地址" />
+              </Form.Item>
+              <img src={form.getFieldValue('swiper_image_light')} alt="" className="w-full mt-4 rounded-sm" />
+            </div>
+            <div>
+              <Form.Item name="swiper_image_dark" label="首页背景图（暗色）">
+                <Input prefix={<PictureOutlined />} addonAfter={<UploadBtn type="swiper_image_dark" />} size="large" placeholder="请输入暗色背景图地址" />
+              </Form.Item>
+              <img src={form.getFieldValue('swiper_image_dark')} alt="" className="w-full mt-4 rounded-sm" />
+            </div>
+          </div>
+
+          <Divider>默认主题</Divider>
+          <Form.Item name="default_theme" label="默认主题（切换浅色/暗色模式）">
+            <Segmented
+              block
+              size="large"
+              options={[
+                { label: '浅色', value: 'light' },
+                { label: '暗色', value: 'dark' },
+              ]}
+              defaultValue={form.getFieldValue('default_theme') || 'light'}
+              onChange={(value) => {
+                form.setFieldValue('default_theme', value);
+                setTheme({ ...theme, default_theme: value });
+              }}
+            />
           </Form.Item>
-          <img src={form.getFieldValue('swiper_image')} alt="" className="w-1/3 mt-4 rounded-sm" />
 
           <Divider>打字机文本</Divider>
           <Form.Item name="swiper_text" label="打字机文本">
