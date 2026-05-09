@@ -15,12 +15,12 @@ import MD from '../components/MD';
 import Summary from '../components/Summary';
 import Nav from '../components/Nav';
 
-import { IoMdPricetags } from 'react-icons/io';
-import { FaHotjar } from 'react-icons/fa';
-import { AiOutlineComment } from 'react-icons/ai';
-import { LuTimer } from 'react-icons/lu';
+// import { IoMdPricetags } from 'react-icons/io';
+// import { FaHotjar } from 'react-icons/fa';
+// import { AiOutlineComment } from 'react-icons/ai';
+// import { LuTimer } from 'react-icons/lu';
 
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 import Encrypt from '@/components/Encrypt';
 import NotFound from '@/app/not-found';
 
@@ -98,7 +98,7 @@ export default async (props: Props) => {
   await recordViewAPI(id);
 
   // 图标样式
-  const iconSty = 'flex justify-center items-center w-5 h-5 rounded-full text-xs mr-1';
+  // const iconSty = 'flex justify-center items-center w-5 h-5 rounded-full text-xs mr-1';
 
   // 如果文章没有加密或者密码正确，则显示文章
   if ((data?.config?.isEncrypt !== 1) || (password && data?.config?.isEncrypt === 1)) {
@@ -112,7 +112,7 @@ export default async (props: Props) => {
             {/* 星空背景组件 */}
             <Starry />
 
-            <div className="absolute w-[80%] sm:w-[70%] lg:w-[60%] xl:w-[50%] top-[60%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[65%] text-white custom_text_shadow">
+            {/*<div className="absolute w-[80%] sm:w-[70%] lg:w-[60%] xl:w-[50%] top-[60%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[65%] text-white custom_text_shadow">
               <div className="text-xl mb-5 sm:text-2xl lg:text-3xl xl:text-4xl text-center sm:mb-7 md:mb-10">{data?.title}</div>
 
               <div className="flex flex-wrap justify-between text-xs sm:text-sm">
@@ -144,7 +144,7 @@ export default async (props: Props) => {
                   <span>发布时间：{dayjs(+data?.createTime).format('YYYY-MM-DD HH:mm')}</span>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </Slide>
 
           <div className="w-[90%] xl:w-6/12 mx-auto mt-12 relative">

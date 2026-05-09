@@ -29,11 +29,11 @@ export default async (props: Props) => {
           <Starry />
 
           {/* 分类信息 */}
-          <div className="absolute top-[40%] left-[50%] transform -translate-x-1/2 w-[80%] text-center text-white text-[20px] xs:text-[25px] sm:text-[30px] custom_text_shadow">
+          {/*<div className="absolute top-[40%] left-[50%] transform -translate-x-1/2 w-[80%] text-center text-white text-[20px] xs:text-[25px] sm:text-[30px] custom_text_shadow">
             <span>
               该分类：{name} ~ 共计{data?.total}篇文章
             </span>
-          </div>
+          </div>*/}
         </Slide>
 
         <div className="md:w-full lg:w-[900px] lg:mx-auto px-4 lg:p-0 my-5">

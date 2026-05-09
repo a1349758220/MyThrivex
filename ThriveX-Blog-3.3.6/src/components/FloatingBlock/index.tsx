@@ -11,14 +11,18 @@ import Rss from '../Tools/components/Rss';
 import { LuMoonStar } from 'react-icons/lu';
 import { FaRegSun } from 'react-icons/fa';
 import { MdOutlineAdsClick, MdOutlineTouchApp } from 'react-icons/md';
+import { transitionTheme } from '@/utils/themeTransition';
 
 const CUSTOM_CONTEXT_MENU_KEY = 'customContextMenuEnabled';
+const FLOATING_BLOCK_VISIBLE_SCROLL_Y = 100;
 
 const FloatingBlock = () => {
   const [isExpanded, setIsExpanded] = useState(false); // 展开状态的变量
   const [isCustomContextMenuEnabled, setIsCustomContextMenuEnabled] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [isDragging, setIsDragging] = useState(false); // 拖拽状态
   const constraintsRef = useRef(null); // 拖拽约束参考
+  const themeButtonRef = useRef<HTMLDivElement>(null);
   const { isDark, setIsDark, web } = useConfigStore();
   const { isOpen: isSearchOpen, onClose: onSearchClose, onOpenChange: onSearchOpenChange } = useDisclosure();
   const { isOpen: isRssOpen, onClose: onRssClose, onOpenChange: onRssOpenChange } = useDisclosure();
@@ -51,11 +55,28 @@ const FloatingBlock = () => {
 
   // 主题切换功能
   const onToggleTheme = () => {
-    setIsDark(!isDark);
+    const nextDark = !isDark;
+    transitionTheme(nextDark, () => setIsDark(nextDark), themeButtonRef.current);
   };
 
   useEffect(() => {
     setIsCustomContextMenuEnabled(localStorage.getItem(CUSTOM_CONTEXT_MENU_KEY) !== 'false');
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const nextVisible = window.scrollY > FLOATING_BLOCK_VISIBLE_SCROLL_Y;
+
+      setIsVisible(nextVisible);
+      if (!nextVisible) {
+        setIsExpanded(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const onToggleCustomContextMenu = () => {
@@ -67,6 +88,12 @@ const FloatingBlock = () => {
   };
 
   const actionItems = [
+    {
+      icon: IoArrowUpOutline,
+      id: 'top',
+      label: '返回顶部',
+      onClick: onReturnTop,
+    },
     {
       icon: isDark ? FaRegSun : LuMoonStar,
       id: 'theme',
@@ -91,12 +118,6 @@ const FloatingBlock = () => {
       label: isCustomContextMenuEnabled ? '关闭自定义右键列表' : '开启自定义右键列表',
       onClick: onToggleCustomContextMenu,
     },
-    {
-      icon: IoArrowUpOutline,
-      id: 'top',
-      label: '返回顶部',
-      onClick: onReturnTop,
-    },
   ];
 
   // 计算每个项目的位置（圆形分布）
@@ -107,6 +128,10 @@ const FloatingBlock = () => {
     const y = Math.sin((angle * Math.PI) / 180) * radius;
     return { x, y };
   };
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div ref={constraintsRef} className="fixed inset-0 pointer-events-none z-50">
@@ -167,7 +192,7 @@ const FloatingBlock = () => {
                     transform: 'translate(-50%, -50%)',
                   }}
                 >
-                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="relative">
+                  <motion.div ref={item.id === 'theme' ? themeButtonRef : undefined} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="relative">
                     <Button
                       isIconOnly
                       size="md"

@@ -10,17 +10,23 @@ export default function MengBeiAn({ mnengbei }: MengBeiAnProps) {
     return null;
   }
 
+  const recordNumber = mnengbei.replace(/^萌?ICP备?/, '').replace(/号$/, '');
+
   return (
-    <div className="group flex justify-center items-center space-x-2 cursor-pointer">
-      <Image src={mengBei} alt="萌ICP" width={22} height={22} className="w-5 h-[22px]" />
-      <a
-        href={`https://icp.gov.moe/?keyword=${mnengbei}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group-hover:text-primary"
-      >
-        萌ICP备{mnengbei}号
-      </a>
-    </div>
+    <a
+      href={`https://icp.gov.moe/?keyword=${recordNumber}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex h-6 items-center overflow-hidden rounded-[2px] text-xs leading-none text-white transition-opacity hover:opacity-90"
+      aria-label={`萌ICP备${recordNumber}号`}
+    >
+      <span className="inline-flex h-full items-center gap-1 bg-[#1f1f1f] px-2">
+        <Image src={mengBei} alt="" width={14} height={14} className="h-3.5 w-3.5" />
+        <span>萌ICP备</span>
+      </span>
+      <span className="inline-flex h-full items-center bg-[#ff2f92] px-2 font-mono">
+        {recordNumber}号
+      </span>
+    </a>
   );
 }

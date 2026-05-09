@@ -37,12 +37,18 @@ const Classics = async ({ data }: ClassicsProps) => {
         <div key={item.id} className="relative overflow-hidden flex h-[190px] md:h-60 lg:h-52 xl:h-60 bg-white dark:bg-black-b tw_container">
           {index % 2 === 0 && (
             <div
-              className="hidden sm:block relative min-w-[45%] bg-cover bg-no-repeat bg-center scale-100 hover:scale-125 z-10 transition-transform"
+              className="group/image hidden sm:block relative min-w-[45%] overflow-hidden z-10"
               style={{
                 clipPath: 'polygon(0 0, 100% 0, 90% 100%, 0 100%)',
-                backgroundImage: `url(${item.cover ?? covers[getRandom(0, covers.length - 1)]})`,
               }}
-            />
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-no-repeat bg-center scale-100 transition-transform duration-300 group-hover/image:scale-125"
+                style={{
+                  backgroundImage: `url(${item.cover ?? covers[getRandom(0, covers.length - 1)]})`,
+                }}
+              />
+            </div>
           )}
 
           <div className="relative w-full sm:w-[65%] py-5 px-5 sm:px-10 lg:px-5 xl:px-10 z-20 bg-white dark:bg-transparent">
@@ -85,12 +91,18 @@ const Classics = async ({ data }: ClassicsProps) => {
 
           {index % 2 !== 0 && (
             <div
-              className="relative min-w-[45%] bg-cover bg-no-repeat bg-center scale-100 z-10 hover:scale-125 transition-transform hidden sm:block"
+              className="group/image relative min-w-[45%] overflow-hidden z-10 hidden sm:block"
               style={{
                 clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)',
-                backgroundImage: `url(${item.cover ?? covers[getRandom(0, covers.length - 1)]})`,
               }}
-            />
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-no-repeat bg-center scale-100 transition-transform duration-300 group-hover/image:scale-125"
+                style={{
+                  backgroundImage: `url(${item.cover ?? covers[getRandom(0, covers.length - 1)]})`,
+                }}
+              />
+            </div>
           )}
         </div>
       ))}

@@ -11,55 +11,57 @@ interface ICPBeianProps {
 export default function ICPBeian({ icp }: ICPBeianProps) {
   const icpRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // 处理ICP备案HTML+JavaScript代码
-    if (icp && icpRef.current) {
-      // 检查是否包含HTML标签或script标签
-      if (icp.includes('<') || icp.includes('script')) {
-        icpRef.current.innerHTML = icp;
-        
-        // 执行内嵌的script标签
-        const scripts = icpRef.current.getElementsByTagName('script');
-        Array.from(scripts).forEach((oldScript) => {
-          const newScript = document.createElement('script');
-          Array.from(oldScript.attributes).forEach((attr) => {
-            newScript.setAttribute(attr.name, attr.value);
-          });
-          newScript.textContent = oldScript.textContent;
-          oldScript.parentNode?.replaceChild(newScript, oldScript);
-        });
-      }
-    }
-  }, [icp]);
+  const isHtml = Boolean(icp && (icp.includes('<') || icp.includes('script')));
 
-  // 如果没有ICP，不渲染
+  useEffect(() => {
+    if (!icp || !icpRef.current || !isHtml) {
+      return;
+    }
+
+    icpRef.current.innerHTML = icp;
+
+    const scripts = icpRef.current.getElementsByTagName('script');
+    Array.from(scripts).forEach((oldScript) => {
+      const newScript = document.createElement('script');
+      Array.from(oldScript.attributes).forEach((attr) => {
+        newScript.setAttribute(attr.name, attr.value);
+      });
+      newScript.textContent = oldScript.textContent;
+      oldScript.parentNode?.replaceChild(newScript, oldScript);
+    });
+  }, [icp, isHtml]);
+
   if (!icp) {
     return null;
   }
 
-  // 判断是否为HTML代码
-  const isHtml = icp.includes('<') || icp.includes('script');
+  if (isHtml) {
+    return (
+      <div className="flex justify-end pb-4">
+        <div ref={icpRef} className="flex items-center" />
+      </div>
+    );
+  }
+
+  const [, icpPrefix = 'ICP备案', icpNumber = icp] = icp.match(/^(\D+)(\d.*)$/) || [];
 
   return (
-    <div className="flex flex-col items-center gap-2 pb-4">
-      {/* ICP备案 - 纯文本显示图标+链接，HTML直接渲染 */}
-      <div className="group flex justify-center items-center space-x-2 cursor-pointer">
-        {!isHtml && (
-          <Image src={ICPIcon} alt="ICP" width={20} height={22} className="w-5 h-[22px]" />
-        )}
-        {isHtml ? (
-          <div ref={icpRef} className="group-hover:text-primary flex items-center" />
-        ) : (
-          <a
-            href="https://beian.miit.gov.cn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group-hover:text-primary"
-          >
-            {icp}
-          </a>
-        )}
-      </div>
+    <div className="flex justify-end pb-4">
+      <a
+        href="https://beian.miit.gov.cn"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex h-6 items-center overflow-hidden rounded-[2px] text-xs leading-none text-white transition-opacity hover:opacity-90"
+        aria-label={icp}
+      >
+        <span className="inline-flex h-full items-center gap-1 bg-[#1f1f1f] px-2">
+          <Image src={ICPIcon} alt="" width={14} height={14} className="h-3.5 w-3.5" />
+          <span>{icpPrefix}</span>
+        </span>
+        <span className="inline-flex h-full items-center bg-[#e53935] px-2 font-mono">
+          {icpNumber}
+        </span>
+      </a>
     </div>
   );
 }

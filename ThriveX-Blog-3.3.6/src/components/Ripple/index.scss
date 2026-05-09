@@ -1,5 +1,9 @@
 /* CSS波浪效果 */
 .rippleComponent {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+
     .ripple {
         height: 1px;
         position: relative;
@@ -13,6 +17,7 @@
             height: 150px;
             transform: translateY(-100%);
             z-index: 2;
+            pointer-events: none;
         }
 
         /* Animation */

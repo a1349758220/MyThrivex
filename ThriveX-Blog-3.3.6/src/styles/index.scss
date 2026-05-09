@@ -1,5 +1,48 @@
 @use "./fun.scss";
 
+/* 汉仪清雅字体 */
+@font-face {
+    font-family: "HanyiQingya";
+    src: url("/fonts/hanyiqingya.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 9999;
+}
+
+.theme-transition-ripple {
+    position: fixed;
+    left: var(--theme-transition-x);
+    top: var(--theme-transition-y);
+    z-index: 99999;
+    width: var(--theme-transition-size);
+    height: var(--theme-transition-size);
+    pointer-events: none;
+    border-radius: 50%;
+    background: var(--theme-transition-color);
+    transform: translate(-50%, -50%) scale(0);
+    animation: theme-transition-ripple 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes theme-transition-ripple {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
 html.dark {
     // 闪念编辑器主题
     --w-e-textarea-color: #fff;
@@ -149,6 +192,148 @@ body {
     }
 }
 
+.home-slide {
+    isolation: isolate;
+    z-index: 10;
+}
+
+.home-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: none;
+    pointer-events: none;
+    background:
+        radial-gradient(circle, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.12) 35%, rgba(0, 0, 0, 0.7) 70%),
+        linear-gradient(180deg, rgba(3, 8, 24, 0.06) 0%, rgba(3, 8, 24, 0.24) 100%);
+}
+
+.home-slide::after {
+    z-index: 6;
+    pointer-events: none;
+}
+
+html.dark .home-slide::before {
+    display: block;
+}
+
+.home-hero-copy {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+    transform: translateY(-100px);
+}
+
+
+
+.home-hero-title {
+    margin: 0;
+    font-family: "HanyiQingya", "LXGW WenKai", serif;
+    text-align: center;
+    letter-spacing: 0.18em;
+}
+
+.home-hero-title--light {
+    font-size: clamp(1.875rem, 5vw, 3.75rem);
+    font-weight: 700;
+    text-shadow: 3px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 0.42em;
+    color: #111827;
+    font-size: clamp(2.5rem, 4vw, 4.25rem);
+    font-weight: 300;
+    line-height: 1.24;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.15),
+        0 0 18px rgba(180, 200, 255, 0.08);
+}
+
+.home-hero-title--dark {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.42em;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(2.5rem, 4vw, 4.25rem);
+    font-weight: 300;
+    line-height: 1.24;
+    background: linear-gradient(115deg, rgba(250, 253, 255, 0.96) 0%, rgba(215, 238, 255, 0.92) 26%, rgba(226, 216, 255, 0.9) 52%, rgba(248, 221, 244, 0.9) 74%, rgba(253, 254, 255, 0.96) 100%);
+    background-size: 160% 160%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.28),
+        0 0 18px rgba(246, 210, 244, 0.2),
+        0 0 32px rgba(215, 205, 255, 0.16),
+        0 0 52px rgba(190, 222, 255, 0.1);
+    animation: home-neon-gradient 18s ease-in-out infinite;
+}
+
+.home-hero-title--dark::before {
+    content: "";
+    position: absolute;
+    inset: -1.2em -1.6em;
+    z-index: -1;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 45% 42%, rgba(255, 218, 248, 0.12) 0%, rgba(225, 208, 255, 0.09) 32%, rgba(198, 226, 255, 0.07) 54%, transparent 72%),
+        radial-gradient(circle at 58% 62%, rgba(214, 196, 255, 0.1) 0%, transparent 58%);
+    filter: blur(14px);
+}
+
+.home-hero-title--dark span {
+    display: block;
+}
+
+.home-hero-cursor {
+    position: relative;
+    right: 30px;
+    display: inline-block;
+    width: 0.5em;
+    height: 3px;
+    margin-left: 0.125rem;
+    vertical-align: text-bottom;
+    background: currentColor;
+    animation: cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes home-neon-gradient {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .home-hero-title {
+        letter-spacing: 0.12em;
+    }
+}
+
 .animate-fade-in-up {
     // 只对 opacity 使用 forwards，transform 动画结束后不锁定
     animation: 
@@ -251,21 +436,34 @@ html.dark .home-meteor-layer {
     display: block;
 }
 
-.home-meteor {
-    // React writes the path variables; CSS handles rendering and animation.
+.home-meteor-shell {
     position: absolute;
     top: var(--y);
     left: var(--x);
     width: var(--length);
     height: var(--height);
-    border-radius: 999px;
-    opacity: 0;
+    opacity: 1;
     transform: rotate(var(--angle)) translateX(0) scaleX(0.75);
     transform-origin: right center;
+    animation: home-meteor-path 5s linear var(--delay) infinite both;
+    transition: opacity 0.8s ease-out;
+    will-change: transform, opacity;
+}
+
+.home-meteor-shell--fade-out {
+    opacity: 0 !important;
+}
+
+.home-meteor {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    opacity: 0;
     background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), var(--color));
     box-shadow: 0 0 0px var(--color), 0 0 0px rgba(46, 46, 46, 0.45);
-    animation: home-meteor-flight 5s linear var(--delay) infinite both;
-    will-change: transform, opacity;
+    animation: home-meteor-glow 5s linear var(--delay) infinite both;
+    will-change: opacity;
 }
 
 .home-meteor::before,
@@ -285,31 +483,48 @@ html.dark .home-meteor-layer {
     filter: blur(16px);
 }
 
-@keyframes home-meteor-flight {
+@keyframes home-meteor-path {
+    0% {
+        transform: rotate(var(--angle)) translateX(0) scaleX(0.75);
+    }
+
+    4% {
+        transform: rotate(var(--angle)) translateX(calc(var(--distance) * 0.08)) scaleX(1);
+    }
+
+    52% {
+        transform: rotate(var(--angle)) translateX(calc(var(--end-distance) * 0.78)) scaleX(1);
+    }
+
+    64% {
+        transform: rotate(var(--angle)) translateX(var(--end-distance)) scaleX(1);
+    }
+
+    100% {
+        transform: rotate(var(--angle)) translateX(var(--end-distance)) scaleX(1);
+    }
+}
+
+@keyframes home-meteor-glow {
     0% {
         opacity: 0;
-        transform: rotate(var(--angle)) translateX(0) scaleX(0.75);
     }
 
     // Fade in near the start so meteors do not pop in halfway through the hero.
     4% {
         opacity: 1;
-        transform: rotate(var(--angle)) translateX(calc(var(--distance) * 0.08)) scaleX(1);
     }
 
     52% {
         opacity: 0.92;
-        transform: rotate(var(--angle)) translateX(calc(var(--end-distance) * 0.78)) scaleX(1);
     }
 
     64% {
         opacity: 0;
-        transform: rotate(var(--angle)) translateX(var(--end-distance)) scaleX(1);
     }
 
     // Stay hidden for the rest of the cycle to create a cooldown window.
     100% {
         opacity: 0;
-        transform: rotate(var(--angle)) translateX(var(--end-distance)) scaleX(1);
     }
 }

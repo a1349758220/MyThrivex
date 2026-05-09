@@ -18,8 +18,6 @@ export default async (props: Props) => {
       <Slide showMeteors>
         {/* 星空背景组件 */}
         <Starry />
-        {/* 首页欢迎词 */}
-        {/* <HomeWelcome /> */}
       </Slide>
 
       <Container>

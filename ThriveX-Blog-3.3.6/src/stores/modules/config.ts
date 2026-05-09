@@ -24,7 +24,12 @@ export default create(
   persist<ConfigState>(
     (set) => ({
       isDark: false,
-      setIsDark: (status: boolean) => set(() => ({ isDark: status })),
+      setIsDark: (status: boolean) => {
+        if (typeof document !== 'undefined') {
+          document.documentElement.classList.toggle('dark', status);
+        }
+        set(() => ({ isDark: status }));
+      },
 
       web: {} as Web,
       setWeb: (data: Web) => set(() => ({ web: data })),

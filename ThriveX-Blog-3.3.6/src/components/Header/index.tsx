@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { Switch } from '@heroui/react';
 import Show from '@/components/Show';
@@ -16,11 +16,13 @@ import { Cate } from '@/types/app/cate';
 import { getCateListAPI } from '@/api/cate';
 
 import { useConfigStore } from '@/stores';
+import { transitionTheme } from '@/utils/themeTransition';
 
 export default () => {
   const patchName = usePathname();
 
   const { isDark, setIsDark, theme } = useConfigStore();
+  const themeSwitchRef = useRef<HTMLDivElement>(null);
 
   // 这些路径段不需要改变导航样式
   const isPathSty = ['/my', '/wall', '/record', '/equipment', '/tags', '/resume', '/album', '/fishpond', '/friend'].some((path) => patchName.includes(path));
@@ -54,7 +56,8 @@ export default () => {
 
   // 手动切换主题
   const toTheme = () => {
-    setIsDark(!isDark);
+    const nextDark = !isDark;
+    transitionTheme(nextDark, () => setIsDark(nextDark), themeSwitchRef.current);
   };
   // 判断当前主题
   useEffect(() => {
@@ -72,7 +75,7 @@ export default () => {
       <div className={`header fixed top-0 w-full h-16 z-50 after:content-[''] after:block after:w-full after:h-0 after:bg-[linear-gradient(#fff,transparent_70%)] dark:after:bg-[linear-gradient(#2b333e,transparent_70%)] ${isPathSty || isScrolled ? 'bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(44,51,62,0.7)] backdrop-blur-md border-b dark:border-[#2b333e] after:!h-8 after:transition-height]' : 'border-transparent'}`}>
         <div className="relative flex justify-center lg:justify-start w-full lg:w-[1500px] h-16 mx-auto">
           <div className={`lg:hidden group absolute top-0 left-0 h-full py-2 px-3 pl-7 ${isPathSty || isScrolled ? 'hover:bg-[#e9edf4] dark:hover:bg-[#455162] rounded-lg' : ''} cursor-pointer  `} onClick={() => setIsOpenSidebarNav(true)}>
-            <BsTextIndentLeft className={`group-hover:text-primary h-full text-[30px] ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}  `} />
+            <BsTextIndentLeft className="group-hover:text-primary h-full text-[30px] text-black dark:text-white" />
           </div>
 
           {/* logo */}
@@ -100,17 +103,7 @@ export default () => {
                       </Show>
                     </Link>
 
-                    <Show is={!!one.children.length}>
-                      <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md backdrop-blur-[5px] bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.95)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
-                        {one.children?.map((two) => (
-                          <li key={two.id} className="group/two">
-                            <Link href={`/cate/${two.id}?name=${two.name}`} target={`${two.url.startsWith('http') ? '_blank' : '_self'}`} className="relative inline-block w-full p-2.5 text-[18px] font-bold box-border text-black dark:text-white hover:!text-slate-500 dark:hover:!text-[#efcea2] transition-[padding] after:content-[''] after:absolute after:left-2.5 after:top-1/2 after:-translate-y-1/2 after:w-0 after:h-[3px] after:bg-primary after:transition-[width] group-hover/two:bg-[#f2f2f2] dark:group-hover/two:bg-[#323e50] group-hover/two:pl-8 hover:after:w-2.5 dark:hover:after:bg-[#efcea2]">
-                              {two.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </Show>
+                    
                   </li>
                 )}
 
@@ -121,7 +114,9 @@ export default () => {
           </ul>
 
           {/* 主题切换开关 */}
-          <Switch size="lg" isSelected={isDark} onValueChange={toTheme} thumbIcon={({ isSelected }) => (isSelected ? <BsFillMoonStarsFill className="text-gray-500" /> : <FaRegSun className="text-gray-500" />)} className={`absolute top-0 right-7 h-full ${isDark ? '[&>.bg-default-200]:!bg-[#4e5969]' : '[&>.bg-default-200]:!bg-[#e1e1e1]'}`} />
+          <div ref={themeSwitchRef} className="absolute top-0 right-7 h-full flex items-center">
+            <Switch aria-label="切换主题" size="lg" isSelected={isDark} onValueChange={toTheme} thumbIcon={({ isSelected }) => (isSelected ? <BsFillMoonStarsFill className="text-gray-500" /> : <FaRegSun className="text-gray-500" />)} className={`${isDark ? '[&>.bg-default-200]:!bg-[#4e5969]' : '[&>.bg-default-200]:!bg-[#e1e1e1]'}`} />
+          </div>
         </div>
       </div>
 

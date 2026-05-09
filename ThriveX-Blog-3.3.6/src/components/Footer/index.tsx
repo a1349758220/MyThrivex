@@ -1,49 +1,52 @@
 import Link from 'next/link';
 import { getWebConfigDataAPI } from '@/api/config';
-// import { getAuthorDataAPI } from '@/api/user';
 import { Web } from '@/types/app/config';
 import Tooltip from './components/Tooltip';
 import ICPBeian from './components/ICPBeian';
 import MengBeiAn from './components/mengBeian';
 
 export default async () => {
-  // const { data: user } = await getAuthorDataAPI();
   const webResponse = await getWebConfigDataAPI<{ value: Web }>('web');
   const web = webResponse?.data?.value as Web;
 
   return (
-    <>
-      {/* <div className='sticky bottom-0 z-30 translate-y-[25px] flex justify-center w-full bg-cover bg-center after:content-[""] after:w-full after:h-[60%] after:absolute after:bottom-[25px] after:left-0 after:bg-[linear-gradient(to_top,#fff,transparent)] dark:after:bg-[linear-gradient(to_top,#2c333e,transparent)]'>
-        <div className="flex justify-center lg:w-[950px] xl:w-[1200px] mx-auto">
-          <Image src={animals} alt="动物" width={660.34} height={79.99} className="relative z-40 hidden md:block" />
-        </div>
-      </div> */}
-
-      <div className="bg-white dark:bg-black-b border-t dark:border-black-b px-10  ">
-        {/* <div className="flex justify-center items-center py-4">
-          <img src={user?.avatar} alt="作者头像" className="w-20 h-20 rounded-full mr-8 avatar-animation shadow-[5px_11px_30px_20px_rgba(255,255,255,0.1)]" />
-          <h2 className="w-[90%] xl:w-3/6 text-sm sm:text-base dark:text-[#8c9ab1] line-clamp-4">{web?.footer}</h2>
-        </div> */}
-
-        {/* ICP备案 */}
-        <ICPBeian icp={web?.icp} />
+    <div className="py-4 bg-white dark:bg-black-b border-t dark:border-black-b px-10">
+      <ICPBeian icp={web?.icp} />
+      <div className="flex flex-wrap justify-end items-center gap-3 pb-4">
+        <a
+          style={{ textDecoration: 'none', color: '#e77c8e' }}
+          href="https://travel.moe/go.html?travel=on"
+          title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-sm"
+        >
+          <img src="https://travel.moe/images/icon/icon64pink.png" style={{ width: 24, height: 24 }} alt="" />
+        </a>
         <MengBeiAn mnengbei={web?.mnengbei} />
-        {/* 
-            为了项目的生态越来越强大，作者在这里恳请大家保留 ThriveX 博客系统版权
-            在项目 Star 突破 2K 后大家可自由选择删除 or 保留版权
-        */}
-        <div className="py-4 border-t dark:border-black-a  ">
-          <Tooltip content="一款免费、开源、年轻、高颜值的现代化博客管理系统">
-            <div className="flex justify-center items-center space-x-3">
-              <img src="https://bu.dusays.com/2025/12/04/6930fdfbda057.png" width={30} height={30} alt="ThriveX 博客管理系统" />
-              <Link href="https://github.com/LiuYuYang01/ThriveX-Admin" target="_blank" className="hover:text-primary  ">
-                {' '}
-                基于开源项目 ThriveX 构建
-              </Link>
-            </div>
-          </Tooltip>
-        </div>
       </div>
-    </>
+
+      <div className="py-4 dark:border-black-a">
+        
+          <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-sm text-gray-600 dark:text-[#8c9ab1]">
+            <span>Powered by</span>
+            <Tooltip content="一款免费、开源、年轻、高颜值的现代化博客管理系统">
+            <Link
+              href="https://github.com/LiuYuYang01/ThriveX-Admin"
+              target="_blank"
+              className="inline-flex items-center gap-1 hover:text-primary"
+            >
+              <span>Thrivex</span>
+                <img src="https://bu.dusays.com/2025/12/04/6930fdfbda057.png" width={30} height={30} alt="ThriveX 博客管理系统" />
+              </Link>
+            </Tooltip>
+            <span>|</span>
+            <span>© 2026-2026</span>
+            <span>|</span>
+            <span>Theme By Astromint</span>
+          </div>
+        
+      </div>
+    </div>
   );
 };

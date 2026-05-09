@@ -22,8 +22,8 @@ export default ({ list, open, onClose }: Props) => {
                   <div key={one.id}>
                     {one.type === 'cate' && (
                       <li className="group/one relative hover:bg-[#e0e6ec] dark:hover:bg-[#495362] rounded-md  ">
-                        <Link href={`/cate/${one.id}?name=${one.name}`} className={`flex justify-between items-center p-3 px-5 text-[15px] group-hover/one:!text-slate-500 dark:group-hover/one:!text-[#efcea2] text-[#333] dark:text-white whitespace-nowrap`} onClick={onClose}>
-                          {one.icon} {one.name}
+                        <Link href={`/cate/${one.id}?name=${one.name}`} className={`flex justify-between items-center p-3 px-5 text-[15px] group-hover/one:!text-slate-500 dark:group-hover/one:!text-[#efcea2] text-black dark:text-white whitespace-nowrap`} onClick={onClose}>
+                          {one.name}
                           <Show is={!!one.children.length}>
                             <IoIosArrowDown className="ml-2" />
                           </Show>
@@ -33,7 +33,7 @@ export default ({ list, open, onClose }: Props) => {
                           <ul className="overflow-hidden top-[50px] w-full rounded-md">
                             {one.children?.map((two) => (
                               <li key={two.id} className="group/two">
-                                <Link href={`/cate/${two.id}?name=${two.name}`} className="inline-block w-full p-2.5 pl-10 text-[15px] box-border text-[#666] dark:text-[#8c9ab1] hover:!text-slate-500 dark:hover:!text-[#efcea2]" onClick={onClose}>
+                                <Link href={`/cate/${two.id}?name=${two.name}`} className="inline-block w-full p-2.5 pl-10 text-[15px] box-border text-black dark:text-white hover:!text-slate-500 dark:hover:!text-[#efcea2]" onClick={onClose}>
                                   {two.name}
                                 </Link>
                               </li>
@@ -45,8 +45,8 @@ export default ({ list, open, onClose }: Props) => {
 
                     {one.type === 'nav' && (
                       <li className="group/one relative hover:bg-[#e0e6ec] dark:hover:bg-[#495362] rounded-md  ">
-                        <Link href={one.url} target={`${one.url.startsWith('http') ? '_blank' : '_self'}`} className={`flex justify-between items-center p-3 px-5 text-[15px] group-hover/one:!text-slate-500 dark:group-hover/one:!text-[#efcea2] text-[#333] dark:text-white whitespace-nowrap`} onClick={onClose}>
-                          {one.icon} {one.name}
+                        <Link href={one.url} target={`${one.url.startsWith('http') ? '_blank' : '_self'}`} className={`flex justify-between items-center p-3 px-5 text-[15px] group-hover/one:!text-slate-500 dark:group-hover/one:!text-[#efcea2] text-black dark:text-white whitespace-nowrap`} onClick={onClose}>
+                          {one.name}
                           <Show is={!!one.children.length}>
                             <IoIosArrowDown className="ml-2" />
                           </Show>
@@ -56,7 +56,7 @@ export default ({ list, open, onClose }: Props) => {
                           <ul className="overflow-hidden top-[50px] w-full rounded-md">
                             {one.children?.map((two) => (
                               <li key={two.id} className="group/two">
-                                <Link href={two.url} target={`${two.url.startsWith('http') ? '_blank' : '_self'}`} className="inline-block w-full p-2.5 pl-10 text-[15px] box-border text-[#666] dark:text-[#8c9ab1] hover:!text-slate-500 dark:hover:!text-[#efcea2]" onClick={onClose}>
+                                <Link href={two.url} target={`${two.url.startsWith('http') ? '_blank' : '_self'}`} className="inline-block w-full p-2.5 pl-10 text-[15px] box-border text-black dark:text-white hover:!text-slate-500 dark:hover:!text-[#efcea2]" onClick={onClose}>
                                   {two.icon} {two.name}
                                 </Link>
                               </li>
